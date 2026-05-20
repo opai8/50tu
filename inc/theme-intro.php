@@ -37,7 +37,7 @@ CSF::createSection( $prefix, array(
         ),
         array(
             'type'    => 'content',
-            'content' => '主题源码地址 <a href="https://github.com/opai8/meitu-gallery" target="_blank">GitHub项目</a>, 使用 MIT License 开源协议进行许可',
+            'content' => '主题源码地址 <a href="https://github.com/opai8/Meitu-Gallery" target="_blank">GitHub项目</a>, 使用 MIT License 开源协议进行许可',
         ),
         array(
             'type'    => 'subheading',

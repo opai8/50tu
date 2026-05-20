@@ -123,11 +123,12 @@ CSF::createSection( $prefix, array(
 			'title'     => '后台优化',
 			'subtitle'  => '简化后台界面，提升管理效率',
 			'options'   => array(
+				'opt_admin_logo'     => '移除 Admin Bar 中的 W 标志',
 				'opt_home_bar'       => '隐藏前台顶部工具栏（管理员保留）',
 				'opt_admin_bar' 	 => '隐藏后台顶部工具栏（包括管理员）',
-				'opt_dashboard_tool' => '清理仪表盘小工具（保留欢迎面板）'				
+				'opt_dashboard_tool' => '清理仪表盘小工具（保留欢迎面板）'			
 			),
-			'default'   => array('opt_home_bar', 'opt_dashboard_tool')
+			'default'   => array('opt_admin_logo', 'opt_home_bar', 'opt_dashboard_tool')
 		),
 		array(
             'id'        => 'opt_block_page',
@@ -264,7 +265,15 @@ CSF::createSection( $prefix, array(
     'title'         => '扩展增强',
     'icon'			=> 'fas fa-arrow-right',
     'fields'        => array(
-
+		array(
+            'id'        => 'opt_editor_stat',
+            'type'      => 'switcher',
+            'title'     => '编辑器内容统计',
+            'subtitle'  => '仅适用经典编辑器',
+            'desc'      => '分别统计你即将发布的文字和图片',
+			'help'		=> '编辑器页面,位置可调整,移动或代码修改',
+            'default'   => true
+        ),
 		array(
             'id'        => 'opt_reset_id',
             'type'      => 'switcher',
@@ -273,8 +282,7 @@ CSF::createSection( $prefix, array(
             'desc'      => '调整表[wp_posts]所有ID重新从「1」顺序排列',
 			'help'		=> '风险巨大,请提前备份数据库',
             'default'   => false
-        ),
-		      
+        ),		      
         array(
             'id'        => 'opt_copy_fieldset',
             'type'      => 'fieldset',

@@ -34,20 +34,17 @@ require get_template_directory() .'/inc/theme-script.php';
 
 	require get_template_directory() .'/inc/basic/theme-basic-extend.php';	// 扩展增强
 
-
-
 /* ====== 页面布局 Page ====== */
-
 	require get_template_directory() .'/inc/page/theme-page-seo.php'; // SEO
 
-
 /* ====== 文章附件 Post ====== */
-
 	require get_template_directory() .'/inc/post/theme-post-attachment.php';// 附件管理
-
 
 /* ====== 广告中心 Ad ====== */
 	require get_template_directory() .'/inc/ad/theme-ad-group.php';// 广告管理
 	
 /* ====== 移动端设置 App ====== */
 	require get_template_directory() .'/inc/app/theme-app-set.php';   // 移动端设置
+	
+	
+

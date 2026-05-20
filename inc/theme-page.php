@@ -43,7 +43,7 @@ CSF::createSection( $prefix, array(
 			'subtitle' => '站点一句话描述的吸引力标题',
 			'desc' => '自定义网站的SEO标题(title)',
 			'help' => '建议25-35字,如果未设置，则采用「站点-副标题」',
-            'default' => '50美图库'
+            'default' => '美图库'
         ),
         array(
             'id' => 'seo_keyword',
@@ -181,6 +181,15 @@ CSF::createSection( $prefix, array(
     'title'         => '图标LOGO',
     'icon'			=> 'fas fa-arrow-right',
     'fields'        => array(
+		array(
+            'id' => 'opt_bar_title',
+            'type' => 'text',
+            'title' => '站点标题',
+			'subtitle' => '后台顶部标题文字',
+			'desc' => '覆盖「设置-常规-站点标题」修改',
+			'help' => '仅后台可见',
+            'default' => 'Meitu-Gallery'
+        ),
         array(
 			'id' => 'opt_favicon',
 			'type' => 'upload',
@@ -240,7 +249,7 @@ CSF::createSection( $prefix, array(
                     'id' => 'opt_github',
                     'type' => 'text',
                     'title' => 'Github项目',
-                    'default' => 'https://github.com/opai8/meitu-gallery'
+                    'default' => 'https://github.com/opai8/Meitu-Gallery'
                 ),
 				array(
                     'id' => 'opt_email',

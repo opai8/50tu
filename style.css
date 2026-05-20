@@ -1,12 +1,12 @@
 /*
 Theme Name: Meitu-Gallery
-Theme URI: https://github.com/opai8/meitu-gallery
+Theme URI: https://github.com/opai8/Meitu-Gallery
 Author: ke Jin
 Author URI: https://ttdh.eu.org/
 Description: 【美图库 - 单文章图集版】专为单文章图集展示的 WordPress 主题。自动从最新一篇文章中提取前N张图片（默认50张），以瀑布流形式展示。适合图集、相册、作品集等场景。
-Version: 3.0.4
-Requires WordPress: 5.0
-Requires PHP: 7.4
+Version: 3.0.6
+Requires WordPress: 5.0+
+Requires PHP: 7.2+
 License: MIT License
 Text Domain: Meitu-Gallery
 Tags: blog, photography, portfolio, responsive-layout, custom-colors, featured-images, full-width-template, theme-options, translation-ready

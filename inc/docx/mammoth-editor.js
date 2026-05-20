@@ -1,12 +1,29 @@
+/**
+ * Word 文档转换器 - 主脚本
+ * 
+ * 功能：使用 mammoth.js 将 DOCX 文件转换为 HTML
+ * - 文件上传和验证
+ * - 文档内容提取
+ * - 图片上传到媒体库
+ * - 插入到 WordPress 编辑器
+ * 
+ * 依赖：mammoth.js, jQuery, wp-util
+ */
+
+// ============================================================================
+// 主程序入口
+// ============================================================================
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 var mammoth = require("mammoth");
 var slug = require("./slug");
 
+// 获取页面上的上传容器
 var parentElement = document.getElementById("mammoth-docx-uploader");
 if (parentElement) {
     setUpMammoth();
 }
 
+// 初始化文档转换器
 function setUpMammoth() {
     var latestDocumentArrayBuffer = null;
     var uploadElement = document.getElementById("mammoth-docx-upload");

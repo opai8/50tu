@@ -12,26 +12,90 @@ function ultimate_rest_api_block() {
         return; // 选项为空时直接退出，节省资源
     }
 
-    // 第1层：路由清空（核心防护）
+    // 第1层：路由过滤（核心防护）
+    // 白名单模式：保留后台编辑器（Gutenberg）必需的 REST 端点，移除其余
     add_filter('rest_endpoints', function($routes) {
-        return []; // 清空所有REST路由
+        // 后台编辑器必需的端点（Gutenberg / 经典编辑器依赖）
+        $allow_routes = [
+            '/wp/v2/posts',
+            '/wp/v2/posts/(?P<id>[\d]+)',
+            '/wp/v2/posts/(?P<id>[\d]+)/revisions',
+            '/wp/v2/posts/(?P<id>[\d]+)/revisions/(?P<revision>[\d]+)',
+            '/wp/v2/pages',
+            '/wp/v2/pages/(?P<id>[\d]+)',
+            '/wp/v2/pages/(?P<id>[\d]+)/revisions',
+            '/wp/v2/pages/(?P<id>[\d]+)/revisions/(?P<revision>[\d]+)',
+            '/wp/v2/media',
+            '/wp/v2/media/(?P<id>[\d]+)',
+            '/wp/v2/types',
+            '/wp/v2/types/(?P<type>[\w-]+)',
+            '/wp/v2/statuses',
+            '/wp/v2/statuses/(?P<status>[\w-]+)',
+            '/wp/v2/taxonomies',
+            '/wp/v2/taxonomies/(?P<taxonomy>[\w-]+)',
+            '/wp/v2/categories',
+            '/wp/v2/categories/(?P<id>[\d]+)',
+            '/wp/v2/tags',
+            '/wp/v2/tags/(?P<id>[\d]+)',
+            '/wp/v2/users',
+            '/wp/v2/users/(?P<id>[\d]+)',
+            '/wp/v2/users/me',
+            '/wp/v2/settings',
+            '/wp/v2/themes',
+            '/wp/v2/themes/(?P<stylesheet>[\w-]+)',
+            '/wp/v2/blocks',
+            '/wp/v2/blocks/(?P<id>[\d]+)',
+            '/wp/v2/block-types',
+            '/wp/v2/block-types/(?P<namespace>[\w-]+)',
+            '/wp/v2/block-types/(?P<namespace>[\w-]+)/(?P<name>[\w-]+)',
+            '/wp/v2/block-renderer',
+            '/wp/v2/block-renderer/(?P<name>[\w-]+)',
+            '/wp/v2/search',
+            '/wp/v2/sidebars',
+            '/wp/v2/widget-types',
+            '/wp/v2/widget-types/(?P<id>[\w-]+)',
+            '/wp/v2/widgets',
+            '/wp/v2/widgets/(?P<id>[\d]+)',
+            '/wp/v2/menus',
+            '/wp/v2/menus/(?P<id>[\d]+)',
+            '/wp/v2/menu-items',
+            '/wp/v2/menu-items/(?P<id>[\d]+)',
+            '/wp/v2/menu-locations',
+            '/wp/v2/global-styles/(?P<id>[\d]+)',
+            '/wp/v2/global-styles/themes/(?P<stylesheet>[\w-]+)',
+            '/wp/v2/editor',
+            '/wp/v2/pattern-directory/patterns',
+        ];
+
+        foreach ($routes as $route => $handlers) {
+            if (!in_array($route, $allow_routes, true)) {
+                unset($routes[$route]);
+            }
+        }
+
+        return $routes;
     }, 1000);
 
-    // 第2层：请求路径拦截
-    if (isset($_SERVER['REQUEST_URI']) && 
-        (strpos($_SERVER['REQUEST_URI'], '/wp-json') !== false || 
+    // 第2层：请求路径拦截（仅拦截非后台的 REST 请求）
+    if (isset($_SERVER['REQUEST_URI']) &&
+        (strpos($_SERVER['REQUEST_URI'], '/wp-json') !== false ||
          strpos($_SERVER['REQUEST_URI'], '/index.php?rest_route=') !== false)) {
-        
+
+        // 后台编辑器请求放行（Gutenberg 通过 /wp-json 加载数据）
+        if (is_admin() || is_user_logged_in()) {
+            return;
+        }
+
         // 第3层：协议禁用
         add_filter('json_enabled', '__return_false');
         add_filter('jsonp_enabled', '__return_false');
-        
+
         // 第4层：强制返回验证信息
         status_header(403);
         header('Cache-Control: no-cache, no-store, must-revalidate');
         header('Pragma: no-cache');
         header('Expires: 0');
-        
+
         echo '<!-- REST API Disabled - Intelligent Guard v3.0 -->';
         echo '<div style="text-align:center;padding:3rem;max-width:600px;margin:0 auto;background:#fff8f8;border:1px solid #ffc0c0;border-radius:8px;font-family:system-ui,-apple-system,sans-serif">';
         echo '<h2 style="color:#c82333;margin-top:0">⚠️ REST API访问被拒绝</h2>';

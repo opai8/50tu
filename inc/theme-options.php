@@ -45,7 +45,7 @@ if( class_exists( 'CSF' ) ) {
 		'show_bar_menu' => false,
 		'admin_bar_menu_icon' => 'dashicons-admin-generic',
 		'framework_title' => '主题设置',
-		'footer_credit' => '感谢使用 <a target="_blank" href="https://github.com/opai8/meitu-gallery">美图库主题</a> 进行创作，欢迎加入主题交流QQ群： 151649165</a>',
+		'footer_credit' => '感谢使用 <a target="_blank" href="https://github.com/opai8/Meitu-Gallery">美图库主题</a> 进行创作，欢迎加入主题交流QQ群： 151649165</a>',
 		'footer_text' => '更优雅的 WordPress 主题 -- 美图库[meitu-gallery] V 3.0.4'
 	) );
 

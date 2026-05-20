@@ -17,9 +17,10 @@ CSF::createSection( $prefix, array(
 		array(
             'id'        => 'opt_docx',
             'type'      => 'switcher',
-            'title'     => '文档上传',
-            'subtitle'  => '写作页面上传按钮',
-            'desc'      => '文档内容可直接插入编辑器',
+            'title'     => 'DOCX文档上传',
+            'subtitle'  => '编辑器页面底部',
+            'desc'      => '文档直接插入编辑器',
+            'help'      => '确保其顶部「显示选项」是勾选状态',
             'default'   => true
         ),
 		array(
